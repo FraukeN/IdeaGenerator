@@ -1,39 +1,60 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="IdeaGenerator.MainPage">
+             xmlns:viewmodels="clr-namespace:IdeaGenerator.ViewModels"
+             x:Class="IdeaGenerator.MainPage"
+             x:DataType="viewmodels:MainViewModel">
 
     <ScrollView>
         <VerticalStackLayout
             Spacing="25"
-            Padding="30,0"
+            Padding="10"
             VerticalOptions="Center">
 
-            <Image
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
-                HorizontalOptions="Center" />
-
             <Label
-                Text="Hello, World!"
+                Text="Introduction:"
                 SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
-                HorizontalOptions="Center" />
-
+                FontSize="32"/>
+            <Label 
+                Text="{Binding Introduction}"
+                FontSize="Medium"/>
             <Label
-                Text="Welcome to .NET Multi-platform App UI"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                FontSize="18"
-                HorizontalOptions="Center" />
+                Text="Goal:"
+                SemanticProperties.HeadingLevel="Level1"
+                FontSize="32"/>
+            <Label 
+                Text="{Binding Goal}"
+                FontSize="Medium"/>
+            <Label
+                Text="Villain:"
+                SemanticProperties.HeadingLevel="Level1"
+                FontSize="32"/>
+            <Label 
+                Text="{Binding Villain}"
+                FontSize="Medium"/>
+            <Label
+                Text="Ally:"
+                SemanticProperties.HeadingLevel="Level1"
+                FontSize="32"/>
+            <Label 
+                Text="{Binding Ally}"
+                FontSize="Medium"/>
+            <Label
+                Text="Patron:"
+                SemanticProperties.HeadingLevel="Level1"
+                FontSize="32"/>
+            <Label 
+                Text="{Binding Patron}"
+                FontSize="Medium"/>
+            <Label
+                Text="Climax:"
+                SemanticProperties.HeadingLevel="Level1"
+                FontSize="32"/>
+            <Label 
+                Text="{Binding Climax}"
+                FontSize="Medium"/>
 
-            <Button
-                x:Name="CounterBtn"
-                Text="Click me"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />
+            <Button Text="Create Adventure Idea" Command="{Binding GenerateIdeaCommand}"/>
 
         </VerticalStackLayout>
     </ScrollView>
