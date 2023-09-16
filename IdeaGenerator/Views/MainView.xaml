@@ -6,57 +6,19 @@
              x:DataType="viewmodels:MainViewModel">
 
     <ScrollView>
-        <VerticalStackLayout
-            Spacing="25"
-            Padding="10"
-            VerticalOptions="Center">
+        <Grid RowDefinitions="*, Auto"
+            Padding="10">
 
-            <Label
-                Text="Introduction:"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"/>
             <Label 
-                Text="{Binding Introduction}"
-                FontSize="Medium"/>
-            <Label
-                Text="Goal:"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"/>
-            <Label 
-                Text="{Binding Goal}"
-                FontSize="Medium"/>
-            <Label
-                Text="Villain:"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"/>
-            <Label 
-                Text="{Binding Villain}"
-                FontSize="Medium"/>
-            <Label
-                Text="Ally:"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"/>
-            <Label 
-                Text="{Binding Ally}"
-                FontSize="Medium"/>
-            <Label
-                Text="Patron:"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"/>
-            <Label 
-                Text="{Binding Patron}"
-                FontSize="Medium"/>
-            <Label
-                Text="Climax:"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"/>
-            <Label 
-                Text="{Binding Climax}"
+                Text="{Binding Adventure}"
                 FontSize="Medium"/>
 
-            <Button Text="Create Adventure Idea" Command="{Binding GenerateIdeaCommand}"/>
+            <ListView ItemsSource="{Binding Agents}"/>
+            <Button Grid.Row="1" 
+                    Text="Create Adventure Idea" 
+                    Command="{Binding GenerateIdeaCommand}"/>
 
-        </VerticalStackLayout>
+        </Grid>
     </ScrollView>
 
 </ContentPage>

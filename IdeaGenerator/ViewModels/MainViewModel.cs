@@ -1,51 +1,55 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using IdeaGenerator.Models;
-using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IdeaGenerator.ViewModels
 {
     public partial class MainViewModel : ObservableObject
     {
-        [ObservableProperty]
-        private string _introduction;
+        private Random random = new Random((int)DateTime.Now.Ticks);
 
-        [ObservableProperty]
-        private string _goal;
-
-        [ObservableProperty]
-        private string _villain;
-
-        [ObservableProperty]
-        private string _ally;
-
-        [ObservableProperty]
-        private string _patron;
-
-        [ObservableProperty]
-        private string _climax;
-        
-        AdventureModel adventureModel = new AdventureModel();
+        private ObservableCollection<string> _agents;
+        public ObservableCollection<string> Agents
+        {
+            get => _agents;
+            set => SetProperty(ref _agents, value);
+        }
 
         public MainViewModel()
         {
-            _introduction = adventureModel.Introduction;
-            _goal = adventureModel.Goal;
-            _villain = adventureModel.Villain;
-            _ally = adventureModel.Ally;
-            _patron = adventureModel.Patron;
-            _climax = adventureModel.Climax;
+            _agents = new ObservableCollection<string>();
         }
 
+        [ObservableProperty]
+        private string _adventure;
+        
         [RelayCommand]
-        private void GenerateIdea()
+        private async void GenerateIdea()
         {
+            List<Agent> agents = await App.AgentRepo.GetAllAgents();
+            if (!agents.Any())
+                LoadDefaultAgents();
+            else
+            {
+                _agents.Clear();
+                foreach (Agent agent in agents)
+                {
+                    _agents.Add(agent.Name);
+                }
+            }
+            //int randomIndex = random.Next(Agents.Count);
+            //string intro = Agents[randomIndex];
             Debug.WriteLine("Idea generated!");
+        }
+
+        private void LoadDefaultAgents()
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                _agents.Add($"Agent {i}");
+            }
         }
     }
 }
