@@ -24,32 +24,20 @@ namespace IdeaGenerator.ViewModels
 
         [ObservableProperty]
         private string _adventure;
-        
+
         [RelayCommand]
         private async void GenerateIdea()
         {
-            List<Agent> agents = await App.AgentRepo.GetAllAgents();
-            if (!agents.Any())
-                LoadDefaultAgents();
-            else
+            List<Agent> agents = await App.AgentRepo.GetAllAgentsAsync();
+
+            _agents.Clear();
+            foreach (Agent agent in agents)
             {
-                _agents.Clear();
-                foreach (Agent agent in agents)
-                {
-                    _agents.Add(agent.Name);
-                }
+                _agents.Add(agent.Name);
             }
             //int randomIndex = random.Next(Agents.Count);
             //string intro = Agents[randomIndex];
             Debug.WriteLine("Idea generated!");
-        }
-
-        private void LoadDefaultAgents()
-        {
-            for (int i = 0; i < 10; i++)
-            {
-                _agents.Add($"Agent {i}");
-            }
         }
     }
 }

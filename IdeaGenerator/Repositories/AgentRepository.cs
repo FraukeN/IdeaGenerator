@@ -19,21 +19,36 @@ namespace IdeaGenerator.Repositories
 
             conn = new SQLiteAsyncConnection(_dbPath);
             await conn.CreateTableAsync<Agent>();
-
         }
 
-        public async Task<List<Agent>> GetAllAgents()
+        public async Task<List<Agent>> GetAllAgentsAsync()
         {
             try
             {
                 await Init();
                 return await conn.Table<Agent>().ToListAsync();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
+                throw;
             }
+        }
 
-            return new List<Agent>();
+        public async Task AddAgentAsync(string agentName)
+        {
+            int result = 0;
+            try
+            {
+                await Init();
+                if (string.IsNullOrEmpty(agentName))
+                    throw new Exception("Agent name can't be empty");
+
+                result = await conn.InsertAsync(new Agent { Name = agentName });
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

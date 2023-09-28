@@ -1,4 +1,5 @@
 ﻿using IdeaGenerator.Repositories;
+using IdeaGenerator.Utils;
 
 namespace IdeaGenerator;
 
@@ -12,5 +13,10 @@ public partial class App : Application
 		MainPage = new AppShell();
 
 		AgentRepo = repo;
+	}
+
+	protected override async void OnStart()
+	{
+		await DatabaseInitialiser.InitialiseDatabase();
 	}
 }
