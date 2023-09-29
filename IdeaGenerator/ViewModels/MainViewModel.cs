@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using IdeaGenerator.Models;
+using IdeaGenerator.Utils;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 
@@ -37,7 +38,7 @@ namespace IdeaGenerator.ViewModels
             }
             int randomIndex = random.Next(Agents.Count);
             string agentName = Agents[randomIndex];
-            Adventure = $"{agentName} does something";
+            Adventure = $"{Grammar.DeterminerFor(agentName)} {agentName} wants to ";
             Debug.WriteLine("Idea generated!");
         }
     }
