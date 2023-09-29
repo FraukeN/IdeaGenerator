@@ -53,7 +53,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Content Include="Data\Agents.json" />
+	  <EmbeddedResource Include="Data\Agents.json" />
 	</ItemGroup>
 
 	<ItemGroup>

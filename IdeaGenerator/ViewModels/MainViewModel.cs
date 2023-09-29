@@ -35,8 +35,9 @@ namespace IdeaGenerator.ViewModels
             {
                 _agents.Add(agent.Name);
             }
-            //int randomIndex = random.Next(Agents.Count);
-            //string intro = Agents[randomIndex];
+            int randomIndex = random.Next(Agents.Count);
+            string agentName = Agents[randomIndex];
+            Adventure = $"{agentName} does something";
             Debug.WriteLine("Idea generated!");
         }
     }

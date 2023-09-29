@@ -9,11 +9,9 @@
         <Grid RowDefinitions="*, Auto"
             Padding="10">
 
-            <Label 
-                Text="{Binding Adventure}"
+            <Label Text="{Binding Adventure}"
                 FontSize="Medium"/>
 
-            <ListView ItemsSource="{Binding Agents}"/>
             <Button Grid.Row="1" 
                     Text="Create Adventure Idea" 
                     Command="{Binding GenerateIdeaCommand}"/>

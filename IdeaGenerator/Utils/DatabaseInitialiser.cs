@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace IdeaGenerator.Utils
@@ -18,9 +20,21 @@ namespace IdeaGenerator.Utils
 
         private static async void PopulateDefaultAgents()
         {
-            for (int i = 0; i < 10; i++)
+            List<string> agentNames;
+            var assembly = Assembly.GetExecutingAssembly();
+            var nameSpace = "IdeaGenerator.Data";
+            var fileName = $"{nameSpace}.Agents.json";
+            using(Stream stream = assembly.GetManifestResourceStream(fileName))
             {
-                await App.AgentRepo.AddAgentAsync($"Agent {i}");
+                using(StreamReader reader = new StreamReader(stream))
+                {
+                    string jsonString = reader.ReadToEnd();
+                    agentNames = JsonSerializer.Deserialize<List<string>>(jsonString);
+                }
+            }
+            foreach(var agentName in agentNames)
+            {
+                await App.AgentRepo.AddAgentAsync(agentName);
             }
         }
     }
