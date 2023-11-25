@@ -18,9 +18,17 @@ namespace IdeaGenerator.ViewModels
             set => SetProperty(ref _agents, value);
         }
 
+        private ObservableCollection<string> _engines;
+        public ObservableCollection<string> Engines
+        {
+            get => _engines;
+            set => SetProperty(ref _engines, value);
+        }
+
         public MainViewModel()
         {
             _agents = new ObservableCollection<string>();
+            _engines = new ObservableCollection<string>();
         }
 
         [ObservableProperty]
@@ -30,6 +38,7 @@ namespace IdeaGenerator.ViewModels
         private async void GenerateIdea()
         {
             List<Agent> agents = await App.AgentRepo.GetAllAgentsAsync();
+            List<Engine> engines = await App.EngineRepo.GetAllEnginesAsync();
 
             _agents.Clear();
             foreach (Agent agent in agents)
@@ -38,7 +47,15 @@ namespace IdeaGenerator.ViewModels
             }
             int randomIndex = random.Next(Agents.Count);
             string agentName = Agents[randomIndex];
-            Adventure = $"{Grammar.DeterminerFor(agentName)} {agentName} wants to ";
+
+            _engines.Clear();
+            foreach (Engine engine in engines)
+            {
+                _engines.Add(engine.Name);
+            }
+            randomIndex = random.Next(Engines.Count);
+            string engineName = Engines[randomIndex];
+            Adventure = $"{Grammar.DeterminerFor(agentName)} {agentName} wants to {engineName}";
         }
     }
 }

@@ -39,6 +39,7 @@ public static class MauiProgram
     {
         string dbPath = FileAccessHelper.GetLocalFilePath("People.db3");
         appBuilder.Services.AddSingleton(s => ActivatorUtilities.CreateInstance<AgentRepository>(s, dbPath));
+        appBuilder.Services.AddSingleton(s => ActivatorUtilities.CreateInstance<EngineRepository>(s, dbPath));
 
         return appBuilder;
     }

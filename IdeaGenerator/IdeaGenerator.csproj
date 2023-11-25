@@ -50,9 +50,11 @@
 
 	<ItemGroup>
 	  <None Remove="Data\Agents.json" />
+	  <None Remove="Data\Engines.json" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <EmbeddedResource Include="Data\Engines.json" />
 	  <EmbeddedResource Include="Data\Agents.json" />
 	</ItemGroup>
 

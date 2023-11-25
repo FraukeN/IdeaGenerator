@@ -6,13 +6,15 @@ namespace IdeaGenerator;
 public partial class App : Application
 {
 	public static AgentRepository AgentRepo { get; private set; }
-	public App(AgentRepository repo)
+    public static EngineRepository EngineRepo { get; private set; }
+    public App(AgentRepository agentRepo, EngineRepository engineRepo)
 	{
 		InitializeComponent();
 
 		MainPage = new AppShell();
 
-		AgentRepo = repo;
+		AgentRepo = agentRepo;
+		EngineRepo = engineRepo;
 	}
 
 	protected override async void OnStart()
