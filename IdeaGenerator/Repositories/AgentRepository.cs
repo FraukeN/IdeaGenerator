@@ -34,16 +34,29 @@ namespace IdeaGenerator.Repositories
             }
         }
 
+        public async Task<Agent> GetAgentAsync(string name)
+        {
+            await Init();
+            return await conn.Table<Agent>().Where(a => a.Name == name).FirstOrDefaultAsync();
+        }
+
+        public async Task<bool> AgentExists(string name)
+        {
+            await Init();
+            Agent agent = await GetAgentAsync(name);
+            return agent == null ? false : true;
+        }
+
         public async Task AddAgentAsync(string agentName)
         {
-            int result = 0;
             try
             {
                 await Init();
                 if (string.IsNullOrEmpty(agentName))
                     throw new Exception("Agent name can't be empty");
 
-                result = await conn.InsertAsync(new Agent { Name = agentName });
+                if (!await AgentExists(agentName))
+                    await conn.InsertAsync(new Agent { Name = agentName });
             }
             catch (Exception)
             {

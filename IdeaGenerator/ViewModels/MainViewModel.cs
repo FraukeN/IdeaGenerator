@@ -39,7 +39,6 @@ namespace IdeaGenerator.ViewModels
             int randomIndex = random.Next(Agents.Count);
             string agentName = Agents[randomIndex];
             Adventure = $"{Grammar.DeterminerFor(agentName)} {agentName} wants to ";
-            Debug.WriteLine("Idea generated!");
         }
     }
 }
